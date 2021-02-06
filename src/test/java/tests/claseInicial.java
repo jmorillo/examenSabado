@@ -1,5 +1,7 @@
 package tests;
 
+
+import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.By;
@@ -11,6 +13,11 @@ import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.Test;
 import org.testng.thread.IThreadWorkerFactory;
 import utilities.GetProperties;
+
+
+import java.util.Locale;
+
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -43,6 +50,7 @@ public class claseInicial {
         String tituloPagina = driver.getTitle();
         System.out.println("El titulo de la pagina es " + tituloPagina);
         assertEquals("Netflix España - Ver series en línea, ver películas en línea", tituloPagina);
+        cierraNavegador();
     }
 
     @Test
@@ -94,9 +102,23 @@ public class claseInicial {
 
     @Test
     public void fakeEmailTest() throws InterruptedException {
-        
+        inicializador();
+        driver.findElement(By.xpath("//input[@id=\'id_email_hero_fuji\']")).click();
+        driver.findElement(By.xpath("//input[@id=\'id_email_hero_fuji\']")).sendKeys("test@test.com");
+        driver.findElement(By.cssSelector(".our-story-card-text:nth-child(2) .cta-btn-txt")).click();
+        Thread.sleep(2500);
+        String url = driver.getCurrentUrl();
+        System.out.println("La url es " + url + " y verificamos si contiene la palabra signup");
+        assertThat((url), CoreMatchers.containsString("signup"));
+        cierraNavegador();
+    }
+
+    @Test
+    public void dataProviderEmailTest() throws InterruptedException {
 
     }
+
+
 
     @After
     public void cierraNavegador() throws InterruptedException {
