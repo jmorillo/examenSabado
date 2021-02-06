@@ -4,7 +4,7 @@
         <parameter name="driverType" value="chrome"></parameter>
         <parameter name="URL" value="chrome"></parameter>
         <classes>
-            <class name="tests.claseInicial"></class>
+            <class name="tests.prueba_netflix"></class>
         </classes>
     </test>
 </suite>
