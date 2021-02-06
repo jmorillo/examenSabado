@@ -1,5 +1,7 @@
 package tests;
 
+import org.junit.After;
+import org.junit.Before;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
@@ -58,6 +60,7 @@ public class claseInicial {
         System.out.println("validamos que existe iniciar sesion de facebook ");
         boolean existeFB = driver.findElement(By.xpath("//*[contains(text(),'Iniciar sesión con Facebook')]")).isDisplayed();
         assertTrue(existeFB);
+        cierraNavegador();
     }
 
     @Test
@@ -65,23 +68,41 @@ public class claseInicial {
         inicializador();
         System.out.println("Hacemos click en inicio sesion");
         driver.findElement(By.xpath("//a[contains(text(),'Iniciar sesión')]")).click();
+        System.out.println("Hacemos click en email");
         driver.findElement(By.cssSelector(".nfEmailPhoneControls .placeLabel")).click();
-        driver.findElement(By.xpath("//input[@id=\'id_userLoginId\']")).sendKeys("xxx");
-        {
-            WebElement element = driver.findElement(By.cssSelector(".nfPasswordControls .placeLabel"));
-            Actions builder = new Actions(driver);
-            builder.moveToElement(element).clickAndHold().perform();
-        }
-        {
-            WebElement element = driver.findElement(By.xpath("//input[@id=\'id_password\']"));
-            Actions builder = new Actions(driver);
-            builder.moveToElement(element).release().perform();
-        }
+        Thread.sleep(500);
+        driver.findElement(By.xpath("//input[@id=\'id_userLoginId\']")).sendKeys("test@test.com");
+        Thread.sleep(500);
         driver.findElement(By.cssSelector(".nfPasswordControls > .input_id")).click();
+        Thread.sleep(500);
         driver.findElement(By.xpath("//input[@id=\'id_password\']")).sendKeys("holamundo");
+        Thread.sleep(500);
         driver.findElement(By.cssSelector(".ui-binary-input > label")).click();
+        Thread.sleep(500);
         driver.findElement(By.cssSelector(".login-button")).click();
+        Thread.sleep(2500);
+        boolean botonRecuerda = driver.findElement(By.cssSelector(".ui-binary-input > label")).isDisplayed();
+        System.out.println("verificamos la recuerda " + botonRecuerda);
+        assertTrue(botonRecuerda);
+        System.out.println("verificamos la pass");
+        //boolean passIncorrecta = driver.findElement(By.xpath("//*[contains(text(),'Contraseña incorrecta')]")).isDisplayed();
+        //A mi no me sale el contraseña incorrecta por lo que he puesto el mensaje de error directamente
+        boolean passIncorrecta = driver.findElement(By.xpath("//*[@data-uia='error-message-container']")).isDisplayed();
+        assertTrue(passIncorrecta);
+        cierraNavegador();
+    }
+
+    @Test
+    public void fakeEmailTest() throws InterruptedException {
+        
 
     }
 
-}
+    @After
+    public void cierraNavegador() throws InterruptedException {
+        driver.close();
+    }
+
+
+
+    }
