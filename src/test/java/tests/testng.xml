@@ -1,0 +1,10 @@
+<suite name="Testng - prueba">
+    <test name="Ejecucion de pruebas">
+        <parameter name="specificTag" value="a"></parameter>
+        <parameter name="driverType" value="chrome"></parameter>
+        <parameter name="URL" value="chrome"></parameter>
+        <classes>
+            <class name="tests.claseInicial"></class>
+        </classes>
+    </test>
+</suite>
