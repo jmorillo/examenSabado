@@ -23,8 +23,7 @@ import static org.junit.Assert.assertTrue;
 
 public class claseInicial {
     private WebDriver driver;
- 
-    @Test
+
     public void inicializador() throws InterruptedException {
         GetProperties properties = new GetProperties();
         String chromeURL = properties.getString("CHROMEDRIVER_PATH");
@@ -44,7 +43,7 @@ public class claseInicial {
 
     }
 
-    @Test
+    @Test(priority = 5)
     public void validarTituloTest() throws InterruptedException {
         inicializador();
         String tituloPagina = driver.getTitle();
@@ -53,7 +52,7 @@ public class claseInicial {
         cierraNavegador();
     }
 
-    @Test
+    @Test(priority = 4)
     public void iniciarSesionPageTest() throws InterruptedException {
         inicializador();
         System.out.println("Hacemos click en inicio sesion");
@@ -71,7 +70,7 @@ public class claseInicial {
         cierraNavegador();
     }
 
-    @Test
+    @Test(priority = 3)
     public void loginToNetflixErrorTest() throws InterruptedException {
         inicializador();
         System.out.println("Hacemos click en inicio sesion");
@@ -100,7 +99,7 @@ public class claseInicial {
         cierraNavegador();
     }
 
-    @Test
+    @Test(priority = 2)
     public void fakeEmailTest() throws InterruptedException {
         inicializador();
         driver.findElement(By.xpath("//input[@id=\'id_email_hero_fuji\']")).click();
@@ -113,11 +112,12 @@ public class claseInicial {
         cierraNavegador();
     }
 
-    @Test
+    @Test(priority = 1)
     public void dataProviderEmailTest() throws InterruptedException {
+        inicializador();
+        cierraNavegador();
 
     }
-
 
 
     @After
