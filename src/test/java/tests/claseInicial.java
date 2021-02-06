@@ -23,7 +23,7 @@ import static org.junit.Assert.assertTrue;
 
 public class claseInicial {
     private WebDriver driver;
-
+ 
     @Test
     public void inicializador() throws InterruptedException {
         GetProperties properties = new GetProperties();
